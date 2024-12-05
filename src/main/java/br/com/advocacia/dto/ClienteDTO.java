@@ -1,12 +1,12 @@
 package br.com.advocacia.dto;
 
+import java.util.List;
+
+import br.com.advocacia.entidade.Advogado;
 import br.com.advocacia.entidade.Cliente;
 import br.com.advocacia.entidade.Processo;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,6 +17,7 @@ public class ClienteDTO {
     private String telefone;
     private String email;
     private List<Processo> processos;
+    private Advogado advogados;
 
     public ClienteDTO(Cliente cadastre) {
         this.id = cadastre.getId();
@@ -25,6 +26,7 @@ public class ClienteDTO {
         this.telefone = cadastre.getTelefone();
         this.email = cadastre.getEmail();
         this.processos = cadastre.getProcessos();
+        this.advogados = cadastre.getAdvogados();
 
     }
 }

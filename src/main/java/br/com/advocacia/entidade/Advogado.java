@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.advocacia.dto.AdvogadoDTO;
 
 @Entity
@@ -23,8 +25,12 @@ public class Advogado {
     private String especialidade;
     private String oab;
     private String estado;
+    @JsonIgnore
+    @OneToMany(mappedBy = "advogados",cascade = CascadeType.ALL,orphanRemoval = true)    
+    private List<Compromisso>compromissos;  
+    @JsonIgnore
     @OneToMany(mappedBy = "advogados",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Compromisso>compromissos;
+    private List<Cliente>clientes;
     
     public Advogado(AdvogadoDTO advogadoDTO) {
   		this.id = advogadoDTO.getId();
@@ -34,6 +40,7 @@ public class Advogado {
   		this.oab = advogadoDTO.getOab();
   		this.estado = advogadoDTO.getEstado();
   		this.compromissos = advogadoDTO.getCompromissos();
+  		this.clientes = advogadoDTO.getClientes();
   	}
 
 }

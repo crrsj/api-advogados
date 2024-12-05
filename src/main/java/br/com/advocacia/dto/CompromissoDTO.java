@@ -13,15 +13,17 @@ import lombok.NoArgsConstructor;
 public class CompromissoDTO {
 	   
 		private Long id;
+		private String titulo;
 	    private LocalDateTime dataHora;	   
 	    private Advogado advogados;	  
-	    private Processo processos;
+	    
 	    
 	    public CompromissoDTO(Compromisso criar) {
 			this.id = criar.getId();
+			this.titulo = criar.getTitulo();
 			this.dataHora = criar.getDataHora();
 			this.advogados = criar.getAdvogados();
-			this.processos = criar.getProcessos();
+			
 		}
 
 }

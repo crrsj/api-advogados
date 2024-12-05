@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_clientes")
 @Data
@@ -21,9 +23,13 @@ public class Cliente {
     private String nome;
     private String cpf;
     private String telefone;
-    private String email;
+    private String email;    
     @OneToMany(mappedBy = "clientes",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Processo>processos;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "advogado_id",nullable = false)
+    private Advogado advogados; 
 
     public Cliente(ClienteDTO clienteDTO) {
         this.id = clienteDTO.getId();
@@ -32,5 +38,6 @@ public class Cliente {
         this.telefone = clienteDTO.getTelefone();
         this.email = clienteDTO.getEmail();
         this.processos = clienteDTO.getProcessos();
+        this.advogados = clienteDTO.getAdvogados();
     }
 }

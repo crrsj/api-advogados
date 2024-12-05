@@ -21,13 +21,14 @@ public class ClienteControle {
 
     private final ClienteServico clienteServico;
 
-    @PostMapping
+    @PostMapping("{clienteId}")
     @Operation(summary = "Endpoint responsável pelo cadastro de clientes.") 
     @ApiResponse(responseCode = "201",description = " sucesso",content = {
    	@Content(mediaType = "application.json",schema = @Schema(implementation = ResponseEntity.class))
     })           
-    public ResponseEntity<ClienteDTO>cadastrarCliente(@RequestBody ClienteDTO clienteDTO){
-        var cadastre = clienteServico.cadastrarCliente(clienteDTO);
+    public ResponseEntity<ClienteDTO>cadastrarCliente(@RequestBody ClienteDTO clienteDTO,
+    		@PathVariable("clienteId")Long clienteId){
+        var cadastre = clienteServico.cadastrarCliente(clienteDTO,clienteId);
         var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").
         buildAndExpand(cadastre.getId()).toUri();
         return ResponseEntity.created(uri).body(new ClienteDTO(cadastre));

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class ProcessoDTO {
 	
 
-	private Long id;
+	    private Long id;
 	    private String numeroProcesso;
 	    private String descricao;
 	    private Status status;	 
@@ -23,15 +23,19 @@ public class ProcessoDTO {
 
 		 public ProcessoDTO(Processo criarProcesso) {
 				this.id = criarProcesso.getId();
+				this.numeroProcesso = criarProcesso.getNumeroProcesso();
 				this.descricao = criarProcesso.getDescricao();
 				this.status = criarProcesso.getStatus();
-				this.compromissos = criarProcesso.getCompromissos();
+				this.clientes = criarProcesso.getClientes();
+				
 			}
 
 		public ProcessoDTO(ProcessoDTO buscarNumero) {
 			this.id = buscarNumero.getId();
+			this.numeroProcesso = buscarNumero.getNumeroProcesso();
 			this.descricao = buscarNumero.getDescricao();
 			this.status = buscarNumero.getStatus();
-			this.compromissos = buscarNumero.getCompromissos();
+			this.clientes = buscarNumero.getClientes();
+			
 		}
 }

@@ -3,6 +3,7 @@ package br.com.advocacia.dto;
 import java.util.List;
 
 import br.com.advocacia.entidade.Advogado;
+import br.com.advocacia.entidade.Cliente;
 import br.com.advocacia.entidade.Compromisso;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class AdvogadoDTO {
 	    private String oab;
 	    private String estado;	    
 	    private List<Compromisso>compromissos;
+	    private List<Cliente>clientes;
 	    
 		
 		public AdvogadoDTO(Advogado cadastrar) {
@@ -29,5 +31,6 @@ public class AdvogadoDTO {
 			this.oab = cadastrar.getOab();
 			this.estado = cadastrar.getEstado();
 			this.compromissos = cadastrar.getCompromissos();
+			this.clientes = cadastrar.getClientes();
 		}
 }

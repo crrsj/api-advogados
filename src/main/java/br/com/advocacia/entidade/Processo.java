@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_processos")
 @Data
@@ -22,9 +24,10 @@ public class Processo {
     private Status status;
     @ManyToOne
     @JoinColumn(name = "cliente_id",nullable = false)
+    @JsonIgnore
     private Cliente clientes;
-    @OneToMany(mappedBy = "processos",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Compromisso>compromissos;
+  
+    
 
 
     public Processo(ProcessoDTO processoDTO) {
@@ -32,5 +35,8 @@ public class Processo {
 		this.numeroProcesso = processoDTO.getNumeroProcesso();
 		this.descricao = processoDTO.getDescricao();
 		this.status = processoDTO.getStatus();
+		this.clientes = processoDTO.getClientes();
+	
+		
 	}
 }

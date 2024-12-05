@@ -2,6 +2,8 @@ package br.com.advocacia.entidade;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.advocacia.dto.CompromissoDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,19 +24,18 @@ public class Compromisso {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+	private String titulo;
     private LocalDateTime dataHora;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "advogado_Id")
-    private Advogado advogados;
-    @ManyToOne
-    @JoinColumn(name = "processo_Id")
-    private Processo processos;
-    
+    private Advogado advogados;  
     
     public Compromisso(CompromissoDTO compromissoDTO) {
   		this.id = compromissoDTO.getId();
+  		this.titulo = compromissoDTO.getTitulo();
   		this.dataHora = compromissoDTO.getDataHora();
   		this.advogados = compromissoDTO.getAdvogados();
-  		this.processos = compromissoDTO.getProcessos();
+  		
   	}
 }
