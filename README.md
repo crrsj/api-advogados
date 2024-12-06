@@ -4,4 +4,5 @@ Tecnologias:
 -Spring
 -H2
 -Swagger
--Em breve estarei inserindo o postgres e o docker
+-Docker
+-Postgres
