@@ -19,6 +19,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -34,7 +35,7 @@ public class AdvogadoControle {
     @ApiResponse(responseCode = "201",description = " sucesso",content = {
    	@Content(mediaType = "application.json",schema = @Schema(implementation = ResponseEntity.class))
     })           
-	public ResponseEntity<AdvogadoDTO>cadastrarAdvogado(@RequestBody AdvogadoDTO advogadoDTO){
+	public ResponseEntity<AdvogadoDTO>cadastrarAdvogado(@RequestBody @Valid AdvogadoDTO advogadoDTO){
 		var cadastrar = advogadoServico.cadastrarAdvogado(advogadoDTO);
 		var uri  = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").
 				buildAndExpand(cadastrar.getId()).toUri();
@@ -78,7 +79,7 @@ public class AdvogadoControle {
     @ApiResponse(responseCode = "200",description = " sucesso",content = {
    	@Content(mediaType = "application.json",schema = @Schema(implementation = ResponseEntity.class))
     })           
-	public ResponseEntity<AdvogadoDTO>atualizarAdvogado(@RequestBody AdvogadoDTO advogadoDTO){
+	public ResponseEntity<AdvogadoDTO>atualizarAdvogado(@RequestBody @Valid AdvogadoDTO advogadoDTO){
 		var atualizar = advogadoServico.atualizarAdvogado(advogadoDTO);
 		return ResponseEntity.ok().body(new AdvogadoDTO(atualizar));
 	}

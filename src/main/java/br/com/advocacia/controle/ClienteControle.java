@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class ClienteControle {
     @ApiResponse(responseCode = "201",description = " sucesso",content = {
    	@Content(mediaType = "application.json",schema = @Schema(implementation = ResponseEntity.class))
     })           
-    public ResponseEntity<ClienteDTO>cadastrarCliente(@RequestBody ClienteDTO clienteDTO,
+    public ResponseEntity<ClienteDTO>cadastrarCliente(@RequestBody @Valid ClienteDTO clienteDTO,
     		@PathVariable("clienteId")Long clienteId){
         var cadastre = clienteServico.cadastrarCliente(clienteDTO,clienteId);
         var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").
@@ -49,7 +50,7 @@ public class ClienteControle {
     @ApiResponse(responseCode = "200",description = " sucesso",content = {
    	@Content(mediaType = "application.json",schema = @Schema(implementation = ResponseEntity.class))
     })           
-    public ResponseEntity<ClienteDTO>atualizarCliente(@RequestBody ClienteDTO clienteDTO){
+    public ResponseEntity<ClienteDTO>atualizarCliente(@RequestBody @Valid ClienteDTO clienteDTO){
         var atualizar = clienteServico.atualizarCliente(clienteDTO);
         return ResponseEntity.ok().body(new ClienteDTO(atualizar));
     }

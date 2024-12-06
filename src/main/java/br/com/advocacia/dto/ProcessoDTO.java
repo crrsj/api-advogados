@@ -6,6 +6,7 @@ import br.com.advocacia.entidade.Cliente;
 import br.com.advocacia.entidade.Compromisso;
 import br.com.advocacia.entidade.Processo;
 import br.com.advocacia.enums.Status;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,10 +14,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProcessoDTO {
 	
-
+	    
 	    private Long id;
+	    @NotBlank(message = "Não pode estar em branco !")
 	    private String numeroProcesso;
-	    private String descricao;
+	    private String descricao;	  
 	    private Status status;	 
 	    private Cliente clientes;	    
 	    private List<Compromisso>compromissos;

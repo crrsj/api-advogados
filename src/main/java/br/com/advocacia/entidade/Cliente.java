@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,11 +22,14 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @Column(unique = true)
     private String cpf;
+    @Column(unique = true)
     private String telefone;
+    @Column(unique = true)
     private String email;    
     @OneToMany(mappedBy = "clientes",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Processo>processos;
+    private List<Processo>processos = new ArrayList<>();
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "advogado_id",nullable = false)

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import br.com.advocacia.entidade.Advogado;
 import br.com.advocacia.entidade.Compromisso;
-import br.com.advocacia.entidade.Processo;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 public class CompromissoDTO {
 	   
 		private Long id;
-		private String titulo;
+		@NotBlank(message = "Não pode estar em branco !")
+		private String titulo;	
 	    private LocalDateTime dataHora;	   
 	    private Advogado advogados;	  
 	    

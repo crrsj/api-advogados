@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.advocacia.dto.ProcessoDTO;
 import br.com.advocacia.entidade.Processo;
+
+
 import br.com.advocacia.repositorio.ClienteRepositorio;
 import br.com.advocacia.repositorio.ProcessoRepositorio;
 import lombok.RequiredArgsConstructor;
@@ -47,6 +49,13 @@ public class ProcessoServico {
 	}
 	
 	public Processo buscarPorProcesso(String processo) {
-		return processoRepositorio.findByNumeroProcesso(processo.trim().toUpperCase());
-	}
+		Optional<Processo>buscarProcesso =  processoRepositorio.findByNumeroProcesso(processo.trim().toUpperCase());	 
+		   return buscarProcesso.get();
+	   }
+	   
+	    
+     
+
+
+
 }

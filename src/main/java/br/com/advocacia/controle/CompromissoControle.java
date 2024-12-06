@@ -19,6 +19,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -33,7 +34,7 @@ public class CompromissoControle {
     @ApiResponse(responseCode = "201",description = " sucesso",content = {
    	@Content(mediaType = "application.json",schema = @Schema(implementation = ResponseEntity.class))
     })           
-	public ResponseEntity<CompromissoDTO>criarCompromisso(@RequestBody CompromissoDTO compromissoDTO,
+	public ResponseEntity<CompromissoDTO>criarCompromisso(@RequestBody @Valid CompromissoDTO compromissoDTO,
 			@PathVariable("advogadoId") Long advogadoId){
 		var criar = compromissoServico.criarCompromisso(compromissoDTO, advogadoId);
 		var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").
@@ -55,7 +56,7 @@ public class CompromissoControle {
 	
 	
 	@GetMapping("{id}")
-	 @Operation(summary = "Endpoint responsável pela busca dos compromissos pelo id.") 
+	@Operation(summary = "Endpoint responsável pela busca dos compromissos pelo id.") 
     @ApiResponse(responseCode = "200",description = " sucesso",content = {
    	@Content(mediaType = "application.json",schema = @Schema(implementation = ResponseEntity.class))
     })           
@@ -65,11 +66,11 @@ public class CompromissoControle {
 	}
 	
 	@PutMapping
-	 @Operation(summary = "Endpoint responsável por atualizar dados dos compromissos.") 
+	@Operation(summary = "Endpoint responsável por atualizar dados dos compromissos.") 
     @ApiResponse(responseCode = "200",description = " sucesso",content = {
    	@Content(mediaType = "application.json",schema = @Schema(implementation = ResponseEntity.class))
     })           
-	public ResponseEntity<CompromissoDTO>atualizarCompromisso(@RequestBody CompromissoDTO compromissoDTO){
+	public ResponseEntity<CompromissoDTO>atualizarCompromisso(@RequestBody @Valid CompromissoDTO compromissoDTO){
 		var atualizar = compromissoServico.AtualizarCompromisso(compromissoDTO);
 		return ResponseEntity.ok().body(new CompromissoDTO(atualizar));
 	}

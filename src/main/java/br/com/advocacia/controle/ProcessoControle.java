@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -34,7 +35,7 @@ public class ProcessoControle {
     @ApiResponse(responseCode = "201",description = " sucesso",content = {
    	@Content(mediaType = "application.json",schema = @Schema(implementation = ResponseEntity.class))
     })           
-	public ResponseEntity<ProcessoDTO>criarProcesso(@RequestBody ProcessoDTO processoDTO,
+	public ResponseEntity<ProcessoDTO>criarProcesso(@RequestBody @Valid ProcessoDTO processoDTO,
 		@PathVariable("clienteId")Long clienteId){
 		var criarProcesso = processoServico.criarProcesso(processoDTO, clienteId);
 		var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").
@@ -44,7 +45,7 @@ public class ProcessoControle {
 	}
 	
 	@GetMapping
-	 @Operation(summary = "Endpoint responsável pela busca dos processos.") 
+	@Operation(summary = "Endpoint responsável pela busca dos processos.") 
     @ApiResponse(responseCode = "200",description = " sucesso",content = {
    	@Content(mediaType = "application.json",schema = @Schema(implementation = ResponseEntity.class))
     })           
@@ -55,7 +56,7 @@ public class ProcessoControle {
 	
 	
 	@GetMapping("{id}")
-	 @Operation(summary = "Endpoint responsável pela busca do processo pelo id.") 
+	@Operation(summary = "Endpoint responsável pela busca do processo pelo id.") 
     @ApiResponse(responseCode = "200",description = " sucesso",content = {
    	@Content(mediaType = "application.json",schema = @Schema(implementation = ResponseEntity.class))
     })           
@@ -67,11 +68,11 @@ public class ProcessoControle {
 	
 	
 	@PutMapping
-	 @Operation(summary = "Endpoint responsável por atualizar dados dos processos.") 
+	@Operation(summary = "Endpoint responsável por atualizar dados dos processos.") 
     @ApiResponse(responseCode = "200",description = " sucesso",content = {
    	@Content(mediaType = "application.json",schema = @Schema(implementation = ResponseEntity.class))
     })           
-	public ResponseEntity<ProcessoDTO>atualizarProcesso(@RequestBody ProcessoDTO processoDTO){
+	public ResponseEntity<ProcessoDTO>atualizarProcesso(@RequestBody @Valid ProcessoDTO processoDTO){
 		var atualizar = processoServico.atualizarProceso(processoDTO);
 		return ResponseEntity.ok().body(new ProcessoDTO(atualizar));
 	}

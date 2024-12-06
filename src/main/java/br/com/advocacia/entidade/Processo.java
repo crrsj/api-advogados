@@ -1,14 +1,21 @@
 package br.com.advocacia.entidade;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.advocacia.dto.ProcessoDTO;
 import br.com.advocacia.enums.Status;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_processos")
@@ -19,13 +26,15 @@ public class Processo {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String numeroProcesso;
     private String descricao;
+    @Enumerated(EnumType.STRING)
     private Status status;
     @ManyToOne
     @JoinColumn(name = "cliente_id",nullable = false)
     @JsonIgnore
-    private Cliente clientes;
+    private Cliente clientes; 
   
     
 
